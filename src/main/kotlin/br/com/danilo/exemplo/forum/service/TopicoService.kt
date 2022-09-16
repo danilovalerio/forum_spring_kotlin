@@ -5,6 +5,7 @@ import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.model.Usuario
 import org.springframework.stereotype.Service
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @Service - faz com que o Spring gerencie essa classe como um serviço
@@ -12,12 +13,12 @@ import java.util.*
  */
 @Service
 class TopicoService(
-    private var topicos: List<Topico>
+    private var topicos: List<Topico> = ArrayList()
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
      */
-    init {
+    /**init {
         val topico = Topico(
             id = 1,
             titulo = "Duvida Kotlinzinho",
@@ -67,7 +68,7 @@ class TopicoService(
         )
 
         topicos = Arrays.asList(topico, topico2, topico3)
-    }
+    }*/
     fun listar(): List<Topico> {
         return topicos
     }
