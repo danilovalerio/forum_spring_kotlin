@@ -3,6 +3,7 @@ package br.com.danilo.exemplo.forum.controller
 import br.com.danilo.exemplo.forum.model.Curso
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.model.Usuario
+import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,27 +16,14 @@ import java.util.*
  */
 @RestController
 @RequestMapping("/topicos")
-class TopicoController {
+class TopicoController(private val service: TopicoService) {
 
     @GetMapping
     fun listar(): List<Topico> {
-        val topico = Topico(
-            id = 1,
-            titulo = "Duvida Kotlinzinho",
-            mensagem = "Variáveis no Kotlin",
-            curso = Curso(
-                id = 1,
-                nome = "Kotlin",
-                categoria = "Programacao"
-            ),
-            autor = Usuario(
-                id = 1,
-                nome = "Danilo",
-                email = "danilo_vs@hotmail.com"
-            )
-        )
-
-        return Arrays.asList(topico, topico, topico)
+        /**
+         * service me devolve o listar
+         */
+        return service.listar()
     }
 
 }
