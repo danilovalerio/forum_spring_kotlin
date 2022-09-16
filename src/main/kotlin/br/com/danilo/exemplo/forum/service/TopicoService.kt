@@ -71,4 +71,16 @@ class TopicoService(
     fun listar(): List<Topico> {
         return topicos
     }
+
+    fun buscaPorId(id: Long): Topico {
+        /**
+         * Com api stream do java 8
+         * filtra dado um topico ->
+         * topico id igual ao id passado
+         * pega o primeiro registro encontrado
+         */
+        return topicos.stream().filter { topico ->
+            topico.id == id
+        }.findFirst().get()
+    }
 }
