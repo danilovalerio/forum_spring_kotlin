@@ -11,8 +11,13 @@ import java.util.*
  * com isso permitindo a injeção de dependência
  */
 @Service
-class TopicoService {
-    fun listar(): List<Topico> {
+class TopicoService(
+    private var topicos: List<Topico>
+) {
+    /**
+     * Lista inicializada para simular ao banco em memória
+     */
+    init {
         val topico = Topico(
             id = 1,
             titulo = "Duvida Kotlinzinho",
@@ -29,6 +34,41 @@ class TopicoService {
             )
         )
 
-        return Arrays.asList(topico, topico, topico)
+        val topico2 = Topico(
+            id = 2,
+            titulo = "Duvida Kotlinzinho 2",
+            mensagem = "Variáveis no Kotlin 2",
+            curso = Curso(
+                id = 1,
+                nome = "Kotlin",
+                categoria = "Programacao"
+            ),
+            autor = Usuario(
+                id = 1,
+                nome = "Danilo",
+                email = "danilo_vs@hotmail.com"
+            )
+        )
+
+        val topico3 = Topico(
+            id = 3,
+            titulo = "Duvida Kotlinzinho 3",
+            mensagem = "Variáveis no Kotlin 3",
+            curso = Curso(
+                id = 1,
+                nome = "Kotlin",
+                categoria = "Programacao"
+            ),
+            autor = Usuario(
+                id = 1,
+                nome = "Danilo",
+                email = "danilo_vs@hotmail.com"
+            )
+        )
+
+        topicos = Arrays.asList(topico, topico2, topico3)
+    }
+    fun listar(): List<Topico> {
+        return topicos
     }
 }
