@@ -7,6 +7,7 @@ import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Retry.Topic
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
@@ -35,6 +36,11 @@ class TopicoController(private val service: TopicoService) {
     @GetMapping("/{id}")
     fun buscarPorId(@PathVariable id: Long): Topico {
         return service.buscaPorId(id)
+    }
+
+    @PostMapping
+    fun cadastrar(topico: Topico){
+        service.cadastrar(topico)
     }
 
 }

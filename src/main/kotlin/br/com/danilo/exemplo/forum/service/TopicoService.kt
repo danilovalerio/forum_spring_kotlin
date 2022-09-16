@@ -83,4 +83,8 @@ class TopicoService(
             topico.id == id
         }.findFirst().get()
     }
+
+    fun cadastrar(topico: Topico) {
+        topicos.plus(topico)
+    }
 }
