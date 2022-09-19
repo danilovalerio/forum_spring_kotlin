@@ -14,7 +14,7 @@ data class UsuarioService(var usuarios: List<Usuario>) {
     }
 
     fun buscaPorId(id: Long): Usuario {
-        usuarios.stream().filter({
+        return usuarios.stream().filter({
             user -> user.id == id
         }).findFirst().get()
     }
