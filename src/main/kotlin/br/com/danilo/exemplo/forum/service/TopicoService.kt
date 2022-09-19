@@ -1,11 +1,10 @@
 package br.com.danilo.exemplo.forum.service
 
 import br.com.danilo.exemplo.forum.dto.NovoTopicoDto
-import br.com.danilo.exemplo.forum.model.Curso
+import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.model.Topico
-import br.com.danilo.exemplo.forum.model.Usuario
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.stream.Collectors
 import kotlin.collections.ArrayList
 
 /**
@@ -72,8 +71,17 @@ class TopicoService(
 
         topicos = Arrays.asList(topico, topico2, topico3)
     }*/
-    fun listar(): List<Topico> {
-        return topicos
+    fun listar(): List<TopicoView> {
+        /**
+         * vamos mapear a lista para devolver uma lista de topicoview
+         */
+        return topicos.stream().map { topico -> TopicoView(
+            id = topico.id,
+            titulo = topico.titulo,
+            mensagem = topico.mensagem,
+            dataCriacao = topico.dataCriacao,
+            status = topico.status
+        ) }.collect(Collectors.toList())
     }
 
     fun buscaPorId(id: Long): Topico {

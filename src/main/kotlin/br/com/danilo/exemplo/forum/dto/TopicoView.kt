@@ -4,7 +4,7 @@ import br.com.danilo.exemplo.forum.model.StatusTopico
 import java.time.LocalDateTime
 
 data class TopicoView(
-    val id: Long,
+    val id: Long?,
     val titulo: String,
     val mensagem: String,
     val status: StatusTopico,
