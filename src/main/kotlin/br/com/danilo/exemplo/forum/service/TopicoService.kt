@@ -1,6 +1,6 @@
 package br.com.danilo.exemplo.forum.service
 
-import br.com.danilo.exemplo.forum.dto.NovoTopicoDto
+import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.model.Topico
 import org.springframework.stereotype.Service
@@ -105,7 +105,7 @@ class TopicoService(
 
     }
 
-    fun cadastrar(dto: NovoTopicoDto) {
+    fun cadastrar(dto: NovoTopicoForm) {
         topicos = topicos.plus(Topico(
             id = topicos.size.toLong() + 1,
             titulo = dto.titulo,
