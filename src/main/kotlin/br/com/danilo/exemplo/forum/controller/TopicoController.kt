@@ -28,7 +28,7 @@ class TopicoController(private val service: TopicoService) {
      * @PathVariable indica que id é uma variavel do caminho
      */
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable id: Long): Topico {
+    fun buscarPorId(@PathVariable id: Long): TopicoView {
         return service.buscaPorId(id)
     }
 

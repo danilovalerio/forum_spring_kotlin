@@ -84,16 +84,25 @@ class TopicoService(
         ) }.collect(Collectors.toList())
     }
 
-    fun buscaPorId(id: Long): Topico {
+    fun buscaPorId(id: Long): TopicoView {
         /**
          * Com api stream do java 8
          * filtra dado um topico ->
          * topico id igual ao id passado
          * pega o primeiro registro encontrado
          */
-        return topicos.stream().filter { topico ->
+        val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == id
         }.findFirst().get()
+
+        return TopicoView(
+            id = topicoEncontrado.id,
+            titulo = topicoEncontrado.titulo,
+            mensagem = topicoEncontrado.mensagem,
+            dataCriacao = topicoEncontrado.dataCriacao,
+            status = topicoEncontrado.status
+        )
+
     }
 
     fun cadastrar(dto: NovoTopicoDto) {
