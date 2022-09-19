@@ -2,6 +2,7 @@ package br.com.danilo.exemplo.forum.service
 
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
+import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
 import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
 import org.springframework.stereotype.Service
@@ -15,9 +16,8 @@ import kotlin.collections.ArrayList
 @Service
 class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
-    private var cursoService: CursoService,
-    private var usuarioService: UsuarioService,
-    private val topicoViewMapper: TopicoViewMapper
+    private val topicoViewMapper: TopicoViewMapper,
+    private val topicoFormMapper: TopicoFormMapper
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -96,13 +96,9 @@ class TopicoService(
 
     }
 
-    fun cadastrar(dto: NovoTopicoForm) {
-        topicos = topicos.plus(Topico(
-            id = topicos.size.toLong() + 1,
-            titulo = dto.titulo,
-            mensagem = dto.mensagem,
-            curso = cursoService.buscaPorId(dto.idCurso),
-            autor = usuarioService.buscaPorId(dto.idAutor)
-        ))
+    fun cadastrar(form: NovoTopicoForm) {
+        val topico = topicoFormMapper.map(form)
+        topico.id = topicos.size.toLong() + 1
+        topicos = topicos.plus(topico)
     }
 }
