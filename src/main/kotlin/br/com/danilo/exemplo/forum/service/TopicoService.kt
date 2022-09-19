@@ -93,7 +93,7 @@ class TopicoService(
             titulo = dto.titulo,
             mensagem = dto.mensagem,
             curso = cursoService.buscaPorId(dto.idCurso),
-            autor =
+            autor = usuarioService.buscaPorId(dto.idAutor)
         ))
     }
 }

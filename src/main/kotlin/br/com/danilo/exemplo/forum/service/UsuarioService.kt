@@ -13,7 +13,7 @@ data class UsuarioService(var usuarios: List<Usuario>) {
         usuarios = Arrays.asList(user1, user2)
     }
 
-    fun buscaPorId(id: Long){
+    fun buscaPorId(id: Long): Usuario {
         usuarios.stream().filter({
             user -> user.id == id
         }).findFirst().get()
