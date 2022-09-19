@@ -1,6 +1,7 @@
 package br.com.danilo.exemplo.forum.controller
 
 import br.com.danilo.exemplo.forum.dto.NovoTopicoDto
+import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.web.bind.annotation.*
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(): List<Topico> {
+    fun listar(): List<TopicoView> {
         /**
          * service me devolve o listar
          */
