@@ -90,6 +90,7 @@ class TopicoService(
 
     fun cadastrar(dto: NovoTopicoDto) {
         topicos.plus(Topico(
+            id = topicos.size.toLong() + 1,
             titulo = dto.titulo,
             mensagem = dto.mensagem,
             curso = cursoService.buscaPorId(dto.idCurso),
