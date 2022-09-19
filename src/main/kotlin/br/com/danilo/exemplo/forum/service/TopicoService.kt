@@ -2,6 +2,7 @@ package br.com.danilo.exemplo.forum.service
 
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
+import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
@@ -15,7 +16,8 @@ import kotlin.collections.ArrayList
 class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
     private var cursoService: CursoService,
-    private var usuarioService: UsuarioService
+    private var usuarioService: UsuarioService,
+    private val topicoViewMapper: TopicoViewMapper
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -75,13 +77,9 @@ class TopicoService(
         /**
          * vamos mapear a lista para devolver uma lista de topicoview
          */
-        return topicos.stream().map { topico -> TopicoView(
-            id = topico.id,
-            titulo = topico.titulo,
-            mensagem = topico.mensagem,
-            dataCriacao = topico.dataCriacao,
-            status = topico.status
-        ) }.collect(Collectors.toList())
+        return topicos.stream().map {
+                topico -> topicoViewMapper.map(topico)
+        }.collect(Collectors.toList())
     }
 
     fun buscaPorId(id: Long): TopicoView {
@@ -94,8 +92,7 @@ class TopicoService(
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == id
         }.findFirst().get()
-
-        return convertTopicoToTopicoView(topicoEncontrado)
+        return topicoViewMapper.map(topicoEncontrado)
 
     }
 
@@ -107,14 +104,5 @@ class TopicoService(
             curso = cursoService.buscaPorId(dto.idCurso),
             autor = usuarioService.buscaPorId(dto.idAutor)
         ))
-    }
-
-    fun convertTopicoToTopicoView(topico: Topico): TopicoView {
-        return TopicoView(
-            id = topico.id,
-            titulo = topico.titulo,
-            mensagem = topico.mensagem,
-            dataCriacao = topico.dataCriacao,
-            status = topico.status)
     }
 }
