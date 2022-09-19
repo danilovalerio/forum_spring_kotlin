@@ -95,13 +95,7 @@ class TopicoService(
             topico.id == id
         }.findFirst().get()
 
-        return TopicoView(
-            id = topicoEncontrado.id,
-            titulo = topicoEncontrado.titulo,
-            mensagem = topicoEncontrado.mensagem,
-            dataCriacao = topicoEncontrado.dataCriacao,
-            status = topicoEncontrado.status
-        )
+        return convertTopicoToTopicoView(topicoEncontrado)
 
     }
 
@@ -113,5 +107,14 @@ class TopicoService(
             curso = cursoService.buscaPorId(dto.idCurso),
             autor = usuarioService.buscaPorId(dto.idAutor)
         ))
+    }
+
+    fun convertTopicoToTopicoView(topico: Topico): TopicoView {
+        return TopicoView(
+            id = topico.id,
+            titulo = topico.titulo,
+            mensagem = topico.mensagem,
+            dataCriacao = topico.dataCriacao,
+            status = topico.status)
     }
 }
