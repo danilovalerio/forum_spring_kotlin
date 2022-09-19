@@ -32,8 +32,8 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody topico: NovoTopicoDto) {
-        service.cadastrar(topico)
+    fun cadastrar(@RequestBody topicoDto: NovoTopicoDto) {
+        service.cadastrar(topicoDto)
     }
 
 }

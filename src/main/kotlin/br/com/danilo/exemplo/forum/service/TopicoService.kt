@@ -1,5 +1,6 @@
 package br.com.danilo.exemplo.forum.service
 
+import br.com.danilo.exemplo.forum.dto.NovoTopicoDto
 import br.com.danilo.exemplo.forum.model.Curso
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.model.Usuario
@@ -13,7 +14,8 @@ import kotlin.collections.ArrayList
  */
 @Service
 class TopicoService(
-    private var topicos: List<Topico> = ArrayList()
+    private var topicos: List<Topico> = ArrayList(),
+    private var cursoService: CursoService
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -85,7 +87,11 @@ class TopicoService(
         }.findFirst().get()
     }
 
-    fun cadastrar(topico: Topico) {
-        topicos.plus(topico)
+    fun cadastrar(dto: NovoTopicoDto) {
+        topicos.plus(Topico(
+            titulo = dto.titulo,
+            mensagem = dto.mensagem,
+            curso = cursoService.buscaPorId(dto.idCurso),
+        ))
     }
 }
