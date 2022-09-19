@@ -15,7 +15,8 @@ import kotlin.collections.ArrayList
 @Service
 class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
-    private var cursoService: CursoService
+    private var cursoService: CursoService,
+    private var usuarioService: UsuarioService
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -92,6 +93,7 @@ class TopicoService(
             titulo = dto.titulo,
             mensagem = dto.mensagem,
             curso = cursoService.buscaPorId(dto.idCurso),
+            autor =
         ))
     }
 }
