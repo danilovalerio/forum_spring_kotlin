@@ -45,10 +45,24 @@ class ExceptionHandler {
         exception: MethodArgumentNotValidException,
         request: HttpServletRequest
     ): ErrorView {
+        /**
+         * HashMap de [chave - valor] para mapear [campo - erro]
+         * Simplificando a mensagem a retornada das validações de campos
+         */
+        val errorMessageCustom = HashMap<String, String?>()
+
+        /**
+         * Percorre a lista de erros dos campos validados
+         */
+        exception.bindingResult.fieldErrors.forEach{
+            //para cada erro encontrado adiciona no hashMap
+            errorValidation -> errorMessageCustom.put(errorValidation.field, errorValidation.defaultMessage)
+        }
+
         return ErrorView(
             status = HttpStatus.BAD_REQUEST.value(),
             error = HttpStatus.BAD_REQUEST.name,
-            message = exception.message,
+            message = errorMessageCustom.toString(),
             path = request.servletPath
         )
     }
