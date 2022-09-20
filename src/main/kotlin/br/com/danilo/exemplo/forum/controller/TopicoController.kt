@@ -4,6 +4,7 @@ import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 /**
  * RestController - recebe as requisições, faz a manipulação e devolve dados
@@ -32,7 +33,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody topicoDto: NovoTopicoForm) {
+    fun cadastrar(@RequestBody @Valid topicoDto: NovoTopicoForm) {
         service.cadastrar(topicoDto)
     }
 
