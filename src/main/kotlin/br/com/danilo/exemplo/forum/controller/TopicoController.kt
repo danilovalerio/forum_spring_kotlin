@@ -4,6 +4,7 @@ import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -33,9 +34,16 @@ class TopicoController(private val service: TopicoService) {
         return service.buscaPorId(id)
     }
 
+    /**
+     * Ao criar um recurso como boa prática REST
+     * Devemos devolver 201
+     * Body com o Recurso criado
+     * Header o endereço do recurso
+     */
     @PostMapping
-    fun cadastrar(@RequestBody @Valid topicoDto: NovoTopicoForm) {
+    fun cadastrar(@RequestBody @Valid topicoDto: NovoTopicoForm): ResponseEntity<TopicoView> {
         service.cadastrar(topicoDto)
+        return ResponseEntity.created(uri).body(topicoView)
     }
 
     @PutMapping
