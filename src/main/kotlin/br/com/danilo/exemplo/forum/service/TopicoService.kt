@@ -3,6 +3,7 @@ package br.com.danilo.exemplo.forum.service
 import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
+import br.com.danilo.exemplo.forum.exception.NotFoundException
 import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
 import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
@@ -18,7 +19,8 @@ import kotlin.collections.ArrayList
 class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
     private val topicoViewMapper: TopicoViewMapper,
-    private val topicoFormMapper: TopicoFormMapper
+    private val topicoFormMapper: TopicoFormMapper,
+    private val notFoundMessage: String = "tópico não encontrado"
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -133,7 +135,7 @@ class TopicoService(
     fun deletar(id: Long) {
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == id
-        }.findFirst().get()
+        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
 
         topicos = topicos.minus(topicoEncontrado)
     }
