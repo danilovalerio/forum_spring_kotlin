@@ -94,7 +94,7 @@ class TopicoService(
          */
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == id
-        }.findFirst().get()
+        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
         return topicoViewMapper.map(topicoEncontrado)
 
     }
@@ -109,7 +109,7 @@ class TopicoService(
     fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == form.id
-        }.findFirst().get()
+        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
 
         /**
          * Remove o topico anterior e adiciona novo topico
