@@ -1,5 +1,6 @@
 package br.com.danilo.exemplo.forum.controller
 
+import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
@@ -35,6 +36,11 @@ class TopicoController(private val service: TopicoService) {
     @PostMapping
     fun cadastrar(@RequestBody @Valid topicoDto: NovoTopicoForm) {
         service.cadastrar(topicoDto)
+    }
+
+    @PutMapping
+    fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm){
+        service.atualizar(form)
     }
 
 }
