@@ -1,5 +1,6 @@
 package br.com.danilo.exemplo.forum.exception
 
+import br.com.danilo.exemplo.forum.dto.ErrorView
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -19,7 +20,7 @@ class ExceptionHandler {
      */
     @ExceptionHandler(NotFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    fun handleNotFound(): ErroView{
+    fun handleNotFound(): ErrorView {
 
     }
 }
