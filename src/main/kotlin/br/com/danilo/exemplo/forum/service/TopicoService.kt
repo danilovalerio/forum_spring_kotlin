@@ -135,7 +135,7 @@ class TopicoService(
     fun deletar(id: Long) {
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        }.findFirst().get()
 
         topicos = topicos.minus(topicoEncontrado)
     }

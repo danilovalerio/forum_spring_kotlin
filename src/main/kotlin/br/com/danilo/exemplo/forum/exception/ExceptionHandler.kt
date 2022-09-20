@@ -34,4 +34,18 @@ class ExceptionHandler {
             path = request.servletPath
         )
     }
+
+    @ExceptionHandler(Exception::class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handleNotFound(
+        exception: Exception,
+        request: HttpServletRequest
+    ): ErrorView {
+        return ErrorView(
+            status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            error = HttpStatus.INTERNAL_SERVER_ERROR.name,
+            message = exception.message,
+            path = request.servletPath
+        )
+    }
 }
