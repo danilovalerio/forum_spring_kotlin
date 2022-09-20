@@ -1,5 +1,6 @@
 package br.com.danilo.exemplo.forum.service
 
+import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
@@ -100,5 +101,25 @@ class TopicoService(
         val topico = topicoFormMapper.map(form)
         topico.id = topicos.size.toLong() + 1
         topicos = topicos.plus(topico)
+    }
+
+    fun atualizar(form: AtualizacaoTopicoForm) {
+        val topicoEncontrado = topicos.stream().filter { topico ->
+            topico.id == form.id
+        }.findFirst().get()
+
+        /**
+         * Remove o topico anterior e adiciona novo topico
+         */
+        topicos = topicos.minus(topicoEncontrado).plus(Topico(
+            id = form.id,
+            titulo = form.titulo,
+            mensagem = form.mensagem,
+            autor = topicoEncontrado.autor,
+            curso = topicoEncontrado.curso,
+            respostas = topicoEncontrado.respostas,
+            status = topicoEncontrado.status,
+            dataCriacao = topicoEncontrado.dataCriacao
+        ))
     }
 }
