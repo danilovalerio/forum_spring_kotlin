@@ -4,6 +4,7 @@ import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -66,7 +67,11 @@ class TopicoController(private val service: TopicoService) {
         return ResponseEntity.ok(topicoViewAtualizado)
     }
 
+    /**
+     * Ao deletar devolve 204 sem corpo, pois o recurso foi excluído
+     */
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long){
         service.deletar(id)
     }
