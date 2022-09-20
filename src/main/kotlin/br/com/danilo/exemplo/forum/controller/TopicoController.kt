@@ -6,6 +6,7 @@ import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
 
 /**
@@ -37,13 +38,23 @@ class TopicoController(private val service: TopicoService) {
     /**
      * Ao criar um recurso como boa prática REST
      * Devemos devolver 201
-     * Body com o Recurso criado
-     * Header o endereço do recurso
+     * Body com a representação do Recurso criado
+     * Header Location o endereço (uri) do recurso
+     *
+     * uriBuilder do Spring sabe criar URI
      */
     @PostMapping
-    fun cadastrar(@RequestBody @Valid topicoDto: NovoTopicoForm): ResponseEntity<TopicoView> {
-        service.cadastrar(topicoDto)
-        return ResponseEntity.created(uri).body(topicoView)
+    fun cadastrar(
+        @RequestBody @Valid topicoDto: NovoTopicoForm,
+        uriBuilder: UriComponentsBuilder
+    ): ResponseEntity<TopicoView> {
+        val topicoViewRecente = service.cadastrar(topicoDto)
+
+        /**
+         * pega a url do servidor e converte para URI esperada
+         */
+        val uri = uriBuilder.path("/topicos/${topicoViewRecente.id}").build().toUri()
+        return ResponseEntity.created(uri).body(topicoViewRecente)
     }
 
     @PutMapping
