@@ -58,8 +58,12 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PutMapping
-    fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm){
-        service.atualizar(form)
+    fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView>{
+        val topicoViewAtualizado = service.atualizar(form)
+        /**
+         * vamos devolver a view do recurso que foi atualizado
+         */
+        return ResponseEntity.ok(topicoViewAtualizado)
     }
 
     @DeleteMapping("/{id}")

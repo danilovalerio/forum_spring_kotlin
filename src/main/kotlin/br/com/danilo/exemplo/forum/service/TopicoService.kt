@@ -104,7 +104,7 @@ class TopicoService(
         return topicoViewMapper.map(topico)
     }
 
-    fun atualizar(form: AtualizacaoTopicoForm) {
+    fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
         val topicoEncontrado = topicos.stream().filter { topico ->
             topico.id == form.id
         }.findFirst().get()
@@ -122,6 +122,12 @@ class TopicoService(
             status = topicoEncontrado.status,
             dataCriacao = topicoEncontrado.dataCriacao
         ))
+
+        val topicoAtualizado = topicos.stream().filter { topico ->
+            topico.id == form.id
+        }.findFirst().get()
+
+        return topicoViewMapper.map(topicoAtualizado)
     }
 
     fun deletar(id: Long) {
