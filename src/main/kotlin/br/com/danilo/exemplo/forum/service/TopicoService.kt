@@ -2,6 +2,7 @@ package br.com.danilo.exemplo.forum.service
 
 import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
+import br.com.danilo.exemplo.forum.dto.TopicoPorCategoriaDto
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.exception.NotFoundException
 import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
@@ -130,5 +131,9 @@ class TopicoService(
     @Transactional
     fun deletar(id: Long) {
         repository.deleteById(id)
+    }
+
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return repository.relatorio()
     }
 }

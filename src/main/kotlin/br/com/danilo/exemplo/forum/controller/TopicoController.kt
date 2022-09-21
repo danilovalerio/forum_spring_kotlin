@@ -2,6 +2,7 @@ package br.com.danilo.exemplo.forum.controller
 
 import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
+import br.com.danilo.exemplo.forum.dto.TopicoPorCategoriaDto
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
 import org.springframework.cache.annotation.CacheEvict
@@ -95,6 +96,11 @@ class TopicoController(private val service: TopicoService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long){
         service.deletar(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return service.relatorio()
     }
 
 }
