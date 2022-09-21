@@ -32,6 +32,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	//Database
 	implementation("com.h2database:h2")
+	//Flyway
+	implementation("org.flywaydb:flyway-core")
 
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
