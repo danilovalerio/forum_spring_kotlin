@@ -4,6 +4,7 @@ import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
@@ -57,6 +59,9 @@ class TopicoController(private val service: TopicoService) {
      * uriBuilder do Spring sabe criar URI
      */
     @PostMapping
+    @Transactional
+    //limpa o cache topicos
+    @CacheEvict(value = ["topicos"], allEntries = true)
     fun cadastrar(
         @RequestBody @Valid topicoDto: NovoTopicoForm,
         uriBuilder: UriComponentsBuilder
@@ -71,6 +76,8 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PutMapping
+    @Transactional
+    @CacheEvict(value = ["topicos"], allEntries = true)
     fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView>{
         val topicoViewAtualizado = service.atualizar(form)
         /**
@@ -83,6 +90,8 @@ class TopicoController(private val service: TopicoService) {
      * Ao deletar devolve 204 sem corpo, pois o recurso foi excluído
      */
     @DeleteMapping("/{id}")
+    @Transactional
+    @CacheEvict(value = ["topicos"], allEntries = true)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long){
         service.deletar(id)
