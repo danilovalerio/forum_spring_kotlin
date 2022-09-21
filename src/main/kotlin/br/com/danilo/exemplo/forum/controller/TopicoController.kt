@@ -20,11 +20,11 @@ import javax.validation.Valid
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(): List<TopicoView> {
+    fun listar(@RequestParam(required = false) nomeCurso: String?): List<TopicoView> {
         /**
          * service me devolve o listar
          */
-        return service.listar()
+        return service.listar(nomeCurso)
     }
 
     /**

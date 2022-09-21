@@ -8,4 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository
  * <Entidade,Tipo do ID>
  */
 interface TopicoRepository: JpaRepository<Topico, Long> {
+
+    /**
+     * findBY = Select From Topico com Join em Curso
+     */
+    fun findByCursoNome(nomeCurso: String): List<Topico>
 }

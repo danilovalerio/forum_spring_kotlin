@@ -80,11 +80,17 @@ class TopicoService(
 
         topicos = Arrays.asList(topico, topico2, topico3)
     }*/
-    fun listar(): List<TopicoView> {
+    fun listar(nomeCurso: String?): List<TopicoView> {
         /**
          * vamos mapear a lista para devolver uma lista de topicoview
          */
-        return repository.findAll().stream().map {
+        val topicos = if (nomeCurso == null) {
+            repository.findAll()
+        } else {
+            repository.findByCursoNome(nomeCurso)
+        }
+
+        return topicos.stream().map {
                 topico -> topicoViewMapper.map(topico)
         }.collect(Collectors.toList())
     }
