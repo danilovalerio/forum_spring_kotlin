@@ -7,6 +7,7 @@ import br.com.danilo.exemplo.forum.exception.NotFoundException
 import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
 import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
+import br.com.danilo.exemplo.forum.repository.TopicoRepository
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 import kotlin.collections.ArrayList
@@ -17,7 +18,7 @@ import kotlin.collections.ArrayList
  */
 @Service
 class TopicoService(
-    private var topicos: List<Topico> = ArrayList(),
+    private val repository: TopicoRepository,
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
     private val notFoundMessage: String = "tópico não encontrado"
@@ -80,7 +81,7 @@ class TopicoService(
         /**
          * vamos mapear a lista para devolver uma lista de topicoview
          */
-        return topicos.stream().map {
+        return repository.findAll().stream().map {
                 topico -> topicoViewMapper.map(topico)
         }.collect(Collectors.toList())
     }
@@ -92,51 +93,25 @@ class TopicoService(
          * topico id igual ao id passado
          * pega o primeiro registro encontrado
          */
-        val topicoEncontrado = topicos.stream().filter { topico ->
-            topico.id == id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        val topicoEncontrado = repository.findById(id).orElseThrow { NotFoundException(notFoundMessage) }
         return topicoViewMapper.map(topicoEncontrado)
-
     }
 
     fun cadastrar(form: NovoTopicoForm): TopicoView {
         val topico = topicoFormMapper.map(form)
-        topico.id = topicos.size.toLong() + 1
-        topicos = topicos.plus(topico)
+        repository.save(topico)
         return topicoViewMapper.map(topico)
     }
 
     fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
-        val topicoEncontrado = topicos.stream().filter { topico ->
-            topico.id == form.id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        val topicoEncontrado = repository.findById(form.id).orElseThrow { NotFoundException(notFoundMessage) }
 
-        /**
-         * Remove o topico anterior e adiciona novo topico
-         */
-        topicos = topicos.minus(topicoEncontrado).plus(Topico(
-            id = form.id,
-            titulo = form.titulo,
-            mensagem = form.mensagem,
-            autor = topicoEncontrado.autor,
-            curso = topicoEncontrado.curso,
-            respostas = topicoEncontrado.respostas,
-            status = topicoEncontrado.status,
-            dataCriacao = topicoEncontrado.dataCriacao
-        ))
-
-        val topicoAtualizado = topicos.stream().filter { topico ->
-            topico.id == form.id
-        }.findFirst().get()
-
-        return topicoViewMapper.map(topicoAtualizado)
+        topicoEncontrado.titulo = form.titulo
+        topicoEncontrado.mensagem = form.mensagem
+        return topicoViewMapper.map(topicoEncontrado)
     }
 
     fun deletar(id: Long) {
-        val topicoEncontrado = topicos.stream().filter { topico ->
-            topico.id == id
-        }.findFirst().get()
-
-        topicos = topicos.minus(topicoEncontrado)
+        repository.deleteById(id)
     }
 }
