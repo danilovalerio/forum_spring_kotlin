@@ -4,6 +4,8 @@ import br.com.danilo.exemplo.forum.dto.AtualizacaoTopicoForm
 import br.com.danilo.exemplo.forum.dto.NovoTopicoForm
 import br.com.danilo.exemplo.forum.dto.TopicoView
 import br.com.danilo.exemplo.forum.service.TopicoService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -14,17 +16,22 @@ import javax.validation.Valid
  * RestController - recebe as requisições, faz a manipulação e devolve dados
  * RequestMapping - toda requisição /topicos vem para essa classe
  * GetMapping - requisão do tipo get cai na função listar
+ *
+ * Pageable recurso para controlar a paginação oferecido pelo Spring Boot
  */
 @RestController
 @RequestMapping("/topicos")
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(@RequestParam(required = false) nomeCurso: String?): List<TopicoView> {
+    fun listar(
+        @RequestParam(required = false) nomeCurso: String?,
+        paginacao: Pageable
+    ): Page<TopicoView> {
         /**
          * service me devolve o listar
          */
-        return service.listar(nomeCurso)
+        return service.listar(nomeCurso, paginacao)
     }
 
     /**

@@ -8,6 +8,8 @@ import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
 import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.repository.TopicoRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
@@ -80,19 +82,22 @@ class TopicoService(
 
         topicos = Arrays.asList(topico, topico2, topico3)
     }*/
-    fun listar(nomeCurso: String?): List<TopicoView> {
+    fun listar(
+        nomeCurso: String?,
+        paginacao: Pageable
+    ): Page<TopicoView> {
         /**
          * vamos mapear a lista para devolver uma lista de topicoview
          */
         val topicos = if (nomeCurso == null) {
-            repository.findAll()
+            repository.findAll(paginacao)
         } else {
-            repository.findByCursoNome(nomeCurso)
+            repository.findByCursoNome(nomeCurso, paginacao)
         }
 
-        return topicos.stream().map {
+        return topicos.map {
                 topico -> topicoViewMapper.map(topico)
-        }.collect(Collectors.toList())
+        }
     }
 
     fun buscaPorId(id: Long): TopicoView {

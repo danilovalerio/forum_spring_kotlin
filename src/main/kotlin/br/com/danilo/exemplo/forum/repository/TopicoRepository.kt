@@ -1,6 +1,8 @@
 package br.com.danilo.exemplo.forum.repository
 
 import br.com.danilo.exemplo.forum.model.Topico
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**
@@ -12,5 +14,5 @@ interface TopicoRepository: JpaRepository<Topico, Long> {
     /**
      * findBY = Select From Topico com Join em Curso
      */
-    fun findByCursoNome(nomeCurso: String): List<Topico>
+    fun findByCursoNome(nomeCurso: String, paginacao: Pageable): Page<Topico>
 }
