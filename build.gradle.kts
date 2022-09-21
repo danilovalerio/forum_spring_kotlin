@@ -34,6 +34,8 @@ dependencies {
 	implementation("com.h2database:h2")
 	//Flyway
 	implementation("org.flywaydb:flyway-core")
+	//Cache para informacoes que não mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
+	implementation("org.springframework.boot:spring-boot-starter-cache")
 
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
