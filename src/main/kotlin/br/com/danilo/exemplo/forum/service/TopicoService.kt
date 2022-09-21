@@ -9,12 +9,15 @@ import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.repository.TopicoRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
 import kotlin.collections.ArrayList
 
 /**
  * @Service - faz com que o Spring gerencie essa classe como um serviço
  * com isso permitindo a injeção de dependência
+ *
+ * @Transactional - é necessário para os método de escrita, que vai fazer a transação SQL
  */
 @Service
 class TopicoService(
@@ -97,12 +100,14 @@ class TopicoService(
         return topicoViewMapper.map(topicoEncontrado)
     }
 
+    @Transactional
     fun cadastrar(form: NovoTopicoForm): TopicoView {
         val topico = topicoFormMapper.map(form)
         repository.save(topico)
         return topicoViewMapper.map(topico)
     }
 
+    @Transactional
     fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
         val topicoEncontrado = repository.findById(form.id).orElseThrow { NotFoundException(notFoundMessage) }
 
@@ -111,6 +116,7 @@ class TopicoService(
         return topicoViewMapper.map(topicoEncontrado)
     }
 
+    @Transactional
     fun deletar(id: Long) {
         repository.deleteById(id)
     }
