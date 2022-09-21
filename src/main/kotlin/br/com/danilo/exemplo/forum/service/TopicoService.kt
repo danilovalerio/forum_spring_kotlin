@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
+import javax.persistence.EntityManager
 import kotlin.collections.ArrayList
 
 /**
@@ -27,7 +28,8 @@ class TopicoService(
     private val repository: TopicoRepository,
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
-    private val notFoundMessage: String = "tópico não encontrado"
+    private val notFoundMessage: String = "tópico não encontrado",
+    private val em: EntityManager
 ) {
     /**
      * Lista inicializada para simular ao banco em memória
@@ -90,6 +92,7 @@ class TopicoService(
         /**
          * vamos mapear a lista para devolver uma lista de topicoview
          */
+        print(em)
         val topicos = if (nomeCurso == null) {
             repository.findAll(paginacao)
         } else {
