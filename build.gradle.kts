@@ -22,7 +22,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
 	//JPA
-	implementation("org.springframework.boot:spring-boot-starter-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	//Database
 	implementation("com.h2database:h2")
 
