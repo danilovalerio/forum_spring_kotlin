@@ -36,6 +36,9 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	//Cache para informacoes que não mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
 	implementation("org.springframework.boot:spring-boot-starter-cache")
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
