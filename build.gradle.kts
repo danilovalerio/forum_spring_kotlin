@@ -31,19 +31,27 @@ dependencies {
 	//JPA
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	//Database
-	implementation("com.h2database:h2")
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation("org.postgresql:postgresql:42.5.0")
+	//implementation("com.h2database:h2")
 	//Flyway
 	implementation("org.flywaydb:flyway-core")
 	//Cache para informacoes que não mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
 	implementation("org.springframework.boot:spring-boot-starter-security")
-
-
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
+/*
+flyway {
+	url = "jdbc:postgresql://localhost:5432/forum"
+	user = "postgres"
+	password = "danilo"
+	locations = arrayOf("classpath:db/migration")
+}*/
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
