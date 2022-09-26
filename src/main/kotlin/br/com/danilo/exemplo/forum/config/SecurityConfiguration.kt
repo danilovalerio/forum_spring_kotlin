@@ -31,8 +31,16 @@ class SecurityConfiguration(
          *
          * Forma de Login disabilitado e alterada para httpBasic
          */
-        http?.authorizeRequests()?.anyRequest()?.authenticated()?.and()?.sessionManagement()
-            ?.sessionCreationPolicy(SessionCreationPolicy.STATELESS)?.and()?.formLogin()?.disable()?.httpBasic()
+        http?.
+        authorizeRequests()?.
+        anyRequest()?.
+        authenticated()?.
+        and()?.
+        sessionManagement()?.
+        sessionCreationPolicy(SessionCreationPolicy.STATELESS)?.
+        and()?.
+        formLogin()?.disable()?.
+        httpBasic()
     }
 
     /**
