@@ -33,6 +33,7 @@ class SecurityConfiguration(
          */
         http?.
         authorizeRequests()?.
+        antMatchers("/topicos")?.hasAnyAuthority("LEITURA_ESCRITA")?.
         anyRequest()?.
         authenticated()?.
         and()?.
