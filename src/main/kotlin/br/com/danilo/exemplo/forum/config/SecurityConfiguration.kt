@@ -1,5 +1,6 @@
 package br.com.danilo.exemplo.forum.config
 
+import br.com.danilo.exemplo.forum.security.JWTAuthenticationFilter
 import br.com.danilo.exemplo.forum.security.JWTLoginFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
