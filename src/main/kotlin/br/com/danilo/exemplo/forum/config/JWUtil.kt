@@ -11,7 +11,7 @@ import java.util.*
 @Component
 class JWUtil {
     // Tempo de expiracao de 60 seg = 60000 milesegundos
-    private val expiration: Long = 60000
+    private val expiration: Long = 1200000
 
     // O secret virá do application.yml
     @Value("\${jwt.secret}")
