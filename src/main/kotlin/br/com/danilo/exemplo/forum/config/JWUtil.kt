@@ -5,8 +5,10 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import org.springframework.stereotype.Component
 import java.util.*
 
+@Component
 class JWUtil {
     // Tempo de expiracao de 60 seg = 60000 milesegundos
     private val expiration: Long = 60000
