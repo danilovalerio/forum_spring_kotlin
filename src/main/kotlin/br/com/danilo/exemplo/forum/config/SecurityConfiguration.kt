@@ -38,8 +38,11 @@ class SecurityConfiguration(
          * Forma de Login disabilitado e alterada para httpBasic
          *
          * /login é permitido por todos
+         *
+         * csrf - permite conexoes de outros servços como não vamos usar e configurar será desabilitado
          */
         http?.
+        csrf()?.disable()?.
         authorizeRequests()?.
         //antMatchers("/topicos")?.hasAnyAuthority("LEITURA_ESCRITA")?.
         antMatchers(HttpMethod.POST,"/login")?.permitAll()?.
