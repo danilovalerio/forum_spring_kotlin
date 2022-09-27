@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
  *
  * OncePerRequestFilter - porque será validado a cada requisição
  */
-class JWTAuthenticationFilter(private val jwtUtil: JWUtil) : OncePerRequestFilter {
+class JWTAuthenticationFilter(private val jwtUtil: JWUtil) : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
