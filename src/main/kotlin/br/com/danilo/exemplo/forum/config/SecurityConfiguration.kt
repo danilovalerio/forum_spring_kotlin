@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 /**
  * O Spring observa essa classe ao iniciar
@@ -16,7 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration(
-    private val userDetailsService: UserDetailsService
+    private val userDetailsService: UserDetailsService,
+    private val jwtUtil: JWUtil
 ) : WebSecurityConfigurerAdapter() {
 
     /**
@@ -30,14 +32,18 @@ class SecurityConfiguration(
          * de autenticação
          *
          * Forma de Login disabilitado e alterada para httpBasic
+         *
+         * /login é permitido por todos
          */
         http?.
         authorizeRequests()?.
         //antMatchers("/topicos")?.hasAnyAuthority("LEITURA_ESCRITA")?.
+        antMatchers("/login")?.permitAll()?.
         anyRequest()?.
         authenticated()?.
-        and()?.
-        sessionManagement()?.
+        and()
+        http?.addFilterBefore(JWTLoginFilter(authManager = authenticationManager(), jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass)
+        http?.sessionManagement()?.
         sessionCreationPolicy(SessionCreationPolicy.STATELESS)?.
         and()?.
         formLogin()?.disable()?.
