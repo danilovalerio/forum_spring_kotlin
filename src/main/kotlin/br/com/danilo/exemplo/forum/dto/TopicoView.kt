@@ -1,6 +1,7 @@
 package br.com.danilo.exemplo.forum.dto
 
 import br.com.danilo.exemplo.forum.model.StatusTopico
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class TopicoView(
@@ -8,5 +9,6 @@ data class TopicoView(
     val titulo: String,
     val mensagem: String,
     val status: StatusTopico,
-    val dataCriacao: LocalDateTime
+    val dataCriacao: LocalDateTime,
+    val dataAltercao: LocalDate?
 )

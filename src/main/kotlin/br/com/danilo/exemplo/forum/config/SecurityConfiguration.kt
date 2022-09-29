@@ -41,6 +41,16 @@ class SecurityConfiguration(
          *
          * csrf - permite conexoes de outros servços como não vamos usar e configurar será desabilitado
          */
+        http?.
+        csrf()?.disable()?.
+        authorizeRequests()?.
+        antMatchers(HttpMethod.GET,"/topicos/*")?.permitAll()?.
+        antMatchers(HttpMethod.PUT,"/topicos")?.permitAll()?.
+        antMatchers(HttpMethod.POST,"/topicos/*")?.permitAll()?.
+        anyRequest()?.
+        authenticated()?.
+        and()
+        http?.sessionManagement()
     }
 
     /**

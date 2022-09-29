@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 import java.util.stream.Collectors
 import javax.persistence.EntityManager
 import kotlin.collections.ArrayList
@@ -128,6 +129,7 @@ class TopicoService(
 
         topicoEncontrado.titulo = form.titulo
         topicoEncontrado.mensagem = form.mensagem
+        topicoEncontrado.dataAlteracao = LocalDate.now()
         return topicoViewMapper.map(topicoEncontrado)
     }
 
