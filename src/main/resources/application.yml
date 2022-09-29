@@ -1,25 +1,3 @@
 spring:
-  flyway:
-    enabled: false
-    baseline-on-migrate: true
-    baseline-version: 0
-    flyway.locations.filsystem: db/migration
-  jpa:
-    #database-platform: org.hibernate.dialect.PostgreSQLDialect
-    #database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        ddl-auto: create
-        show_sql: true
-        format_sql: true
-    defer-datasource-initialization: false
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/forum
-    username: postgres
-    password: danilo
-  #h2:
-   # console:
-    #  enabled: true
-jwt:
-  secret: secreto
+  profiles:
+    active: dev

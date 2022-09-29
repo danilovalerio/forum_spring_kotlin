@@ -1,4 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+/**
+tasks.register("bootRunDev") {
+	group = "br.com.danilo.exemplo"
+	doFirst {
+		tasks.bootRun.configure{
+			systemProperty("spring.profiles.active","dev")
+		}
+	}
+	finalizedBy("bootRun")
+}*/
 
 plugins {
 	id("org.springframework.boot") version "2.7.3"
