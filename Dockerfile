@@ -10,7 +10,7 @@ ADD /build/libs/forum-0.0.1-SNAPSHOT.jar forum.jar
 #-XX:CICompilerCount=2 2 compiladores para melhor performance
 #"-Dserver.port=$PORT" $PORT será fornecida pelo HEROKU
 #"-Dspring.profiles.active=devh2" profile ativo para o ambiente que quiser
-ENTRYPOINT ["java", "$JAVA_OPS --XX:+UseContainerSupport", "Xmx300m -Xss512k -XX:CICompilerCount=2", "-Dserver.port=$PORT", "-Dspring.profiles.active=devh2", "-jar", "forum.jar"]
+ENTRYPOINT ["java", "$JAVA_OPTS -XX:+UseContainerSupport", "-Xmx300m -Xss512k -XX:CICompilerCount=2", "-Dserver.port=$PORT", "-Dspring.profiles.active=devh2", "-jar", "forum.jar"]
 
 #Para criar a imagem docker com nome forum
 #docker build -t forum -f Dockerfile .

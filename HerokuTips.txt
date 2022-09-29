@@ -1,0 +1,20 @@
+HEROKU CLI - NO CMD
+> criar aplicacao
+heroku create
+
+> apos criar projeto acessar o diretorio do dockerfile
+d:\Users\cd
+> apontar para o app criado no heroku "heroku git:remote -a aplicacaocriada"
+heroku git:remote -a quiet-reaches-55503
+
+> após isso set para o app
+> logar no registry container do heroku
+heroku container:login
+
+> logo apos passar a stack default web para criar a imagem da aplicacao para deploiarmos o container
+heroku container:push web
+
+> após criado com sucesso podemos fazer release da imagem
+heroku container:release web
+
+
