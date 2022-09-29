@@ -1,0 +1,2 @@
+insert into curso(id, nome, categoria) values (1, 'Kotlin', 'PROGRAMACAO')
+insert into usuario(id, nome, email, password) values (1, 'Danilo Valerio', 'danilo@gmail.com', '$2a$12$UsSLUB156FdE3PVlro6JeOdofcWL3UzneO.2zJne3zkUMUOtUi666')

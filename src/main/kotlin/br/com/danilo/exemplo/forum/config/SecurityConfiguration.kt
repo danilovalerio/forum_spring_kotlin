@@ -41,18 +41,6 @@ class SecurityConfiguration(
          *
          * csrf - permite conexoes de outros servços como não vamos usar e configurar será desabilitado
          */
-        http?.
-        csrf()?.disable()?.
-        authorizeRequests()?.
-        antMatchers("/topicos")?.hasAnyAuthority("LEITURA_ESCRITA")?.
-        antMatchers(HttpMethod.POST,"/login")?.permitAll()?.
-        anyRequest()?.
-        authenticated()?.
-        and()
-        http?.addFilterBefore(JWTLoginFilter(authManager = authenticationManager(), jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass)
-        http?.addFilterBefore(JWTAuthenticationFilter(jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass)
-        http?.sessionManagement()?.
-        sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
     /**

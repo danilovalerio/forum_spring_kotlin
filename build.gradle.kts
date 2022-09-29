@@ -41,9 +41,9 @@ dependencies {
 	//JPA
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	//Database
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-	implementation("org.postgresql:postgresql:42.5.0")
-	//implementation("com.h2database:h2")
+	//https://mvnrepository.com/artifact/org.postgresql/postgresql
+	//implementation("org.postgresql:postgresql:42.5.0")
+	implementation("com.h2database:h2")
 	//Flyway
 	implementation("org.flywaydb:flyway-core")
 	//Cache para informacoes que não mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
