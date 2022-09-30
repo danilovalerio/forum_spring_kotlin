@@ -54,7 +54,13 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.13.2")
+	// https://mvnrepository.com/artifact/org.assertj/assertj-core
+	testImplementation("org.assertj:assertj-core:3.23.1")
+
+
 }
 
 /*
