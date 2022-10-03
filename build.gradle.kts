@@ -71,7 +71,7 @@ dependencies {
 	//testImplementation("org.testcontainers:testcontainers:1.17.4")
 	//testImplementation('org.testcontainers:postgres') //no version specified
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
-	testImplementation("org.springframework.security:spring-security-test")
+	//testImplementation("org.springframework.security:spring-security-test")
 }
 
 /*

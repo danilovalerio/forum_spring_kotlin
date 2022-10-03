@@ -1,0 +1,6 @@
+REDIS CLI
+No docker pode abrir no cmd externo
+> redis-cli
+após acessar a cli do redis
+> monitor
+o retor será ok aí conseguimos visualizar a utilização do cache

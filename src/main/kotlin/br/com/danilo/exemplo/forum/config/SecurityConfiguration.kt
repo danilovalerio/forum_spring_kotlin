@@ -45,8 +45,11 @@ class SecurityConfiguration(
         csrf()?.disable()?.
         authorizeRequests()?.
         antMatchers(HttpMethod.GET,"/topicos/*")?.permitAll()?.
+        antMatchers(HttpMethod.GET,"/topicos")?.permitAll()?.
+        antMatchers(HttpMethod.GET,"/topicos/")?.permitAll()?.
         antMatchers(HttpMethod.PUT,"/topicos")?.permitAll()?.
         antMatchers(HttpMethod.POST,"/topicos/*")?.permitAll()?.
+        antMatchers(HttpMethod.POST,"/topicos")?.permitAll()?.
         anyRequest()?.
         authenticated()?.
         and()
