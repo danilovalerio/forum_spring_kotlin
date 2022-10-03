@@ -30,7 +30,6 @@ import javax.validation.Valid
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    @Cacheable("topicos")
     fun listar(
         @RequestParam(required = false) nomeCurso: String?,
         @PageableDefault(size = 5, sort = ["dataCriacao"], direction = Sort.Direction.DESC)
@@ -61,8 +60,6 @@ class TopicoController(private val service: TopicoService) {
      */
     @PostMapping
     @Transactional
-    //limpa o cache topicos
-    @CacheEvict(value = ["topicos"], allEntries = true)
     fun cadastrar(
         @RequestBody @Valid topicoDto: NovoTopicoForm,
         uriBuilder: UriComponentsBuilder
@@ -78,7 +75,6 @@ class TopicoController(private val service: TopicoService) {
 
     @PutMapping
     @Transactional
-    @CacheEvict(value = ["topicos"], allEntries = true)
     fun atualizar(@RequestBody @Valid form: AtualizacaoTopicoForm): ResponseEntity<TopicoView>{
         val topicoViewAtualizado = service.atualizar(form)
         /**

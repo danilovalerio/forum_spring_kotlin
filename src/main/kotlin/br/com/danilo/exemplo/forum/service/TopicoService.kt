@@ -9,6 +9,8 @@ import br.com.danilo.exemplo.forum.mapper.TopicoFormMapper
 import br.com.danilo.exemplo.forum.mapper.TopicoViewMapper
 import br.com.danilo.exemplo.forum.model.Topico
 import br.com.danilo.exemplo.forum.repository.TopicoRepository
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -86,6 +88,7 @@ class TopicoService(
 
         topicos = Arrays.asList(topico, topico2, topico3)
     }*/
+    @Cacheable("topicos")
     fun listar(
         nomeCurso: String?,
         paginacao: Pageable
@@ -117,6 +120,8 @@ class TopicoService(
     }
 
     @Transactional
+    //limpa o cache topicos
+    @CacheEvict(value = ["topicos"], allEntries = true)
     fun cadastrar(form: NovoTopicoForm): TopicoView {
         val topico = topicoFormMapper.map(form)
         repository.save(topico)
@@ -124,6 +129,8 @@ class TopicoService(
     }
 
     @Transactional
+    //limpa o cache topicos
+    @CacheEvict(value = ["topicos"], allEntries = true)
     fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
         val topicoEncontrado = repository.findById(form.id).orElseThrow { NotFoundException(notFoundMessage) }
 
