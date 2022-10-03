@@ -26,6 +26,8 @@ class TopicoServiceTest {
     val topicoRepository: TopicoRepository = mockk {
         //Sempre que topicoRepository for chamado com qualqquer parametro
         every { findByCursoNome(any(), any()) } returns topicos
+        //Sempre que chamar o findAll com paginacao retorna os topicos
+        every { findAll(paginacao) } returns topicos
     }
     val topicoViewMapper: TopicoViewMapper = mockk {
         // sempre que topicoViewMapper.map for chamado com qualquer parametro retorna nosso objeto mok=ckado
@@ -46,5 +48,14 @@ class TopicoServiceTest {
         verify(exactly = 1) { topicoViewMapper.map(any()) }
         verify(exactly = 0) { topicoRepository.findAll(paginacao) }
 
+    }
+
+    @Test
+    fun `deve listar todos os topicos quando o nome do curso for nulo`(){
+        topicoService.listar(null, paginacao)
+
+        verify(exactly = 0) { topicoRepository.findByCursoNome(any(), any()) }
+        verify(exactly = 1) { topicoViewMapper.map(any()) }
+        verify(exactly = 1) { topicoRepository.findAll(paginacao) }
     }
 }
