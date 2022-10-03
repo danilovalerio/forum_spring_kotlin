@@ -27,7 +27,10 @@ class TopicoServiceTest {
         //Sempre que topicoRepository for chamado com qualqquer parametro
         every { findByCursoNome(any(), any()) } returns topicos
     }
-    val topicoViewMapper: TopicoViewMapper = mockk()
+    val topicoViewMapper: TopicoViewMapper = mockk {
+        // sempre que topicoViewMapper.map for chamado com qualquer parametro retorna nosso objeto mok=ckado
+        every { map(any()) } returns TopicoViewTest.build()
+    }
     val topicoFormMapper: TopicoFormMapper = mockk()
     val em: EntityManager = mockk()
 
@@ -37,9 +40,6 @@ class TopicoServiceTest {
 
     @Test
     fun `deve listar topicos a partir do nome do curso`(){
-        // sempre que topicoViewMapper.map for chamado com qualquer parametro retorna nosso objeto mok=ckado
-        every { topicoViewMapper.map(any()) } returns TopicoViewTest.build()
-
         topicoService.listar("Kotlin Básico", paginacao = paginacao)
 
         verify(exactly = 1) { topicoRepository.findByCursoNome(any(), any()) }
