@@ -60,6 +60,8 @@ dependencies {
 	// para acessar swaggger-ui/index/html
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+	implementation("org.springframework.boot:spring-boot-starter-data-redis:2.7.4")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.13.2")
