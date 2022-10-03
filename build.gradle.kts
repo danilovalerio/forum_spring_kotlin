@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 /**
 tasks.register("bootRunDev") {
 	group = "br.com.danilo.exemplo"
@@ -59,8 +60,11 @@ dependencies {
 	testImplementation("io.mockk:mockk:1.13.2")
 	// https://mvnrepository.com/artifact/org.assertj/assertj-core
 	testImplementation("org.assertj:assertj-core:3.23.1")
-
-
+	//testContainers
+	//testImplementation("org.testcontainers:testcontainers:1.17.4")
+	//testImplementation('org.testcontainers:postgres') //no version specified
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 /*
