@@ -56,6 +56,11 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+	// Documentacao da API https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+	// para acessar swaggger-ui/index/html
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.13.2")
 	// https://mvnrepository.com/artifact/org.assertj/assertj-core
