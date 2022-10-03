@@ -88,7 +88,7 @@ class TopicoService(
 
         topicos = Arrays.asList(topico, topico2, topico3)
     }*/
-    @Cacheable("topicos")
+    @Cacheable(cacheNames = ["topicos"], key = "#root.method.name")
     fun listar(
         nomeCurso: String?,
         paginacao: Pageable
