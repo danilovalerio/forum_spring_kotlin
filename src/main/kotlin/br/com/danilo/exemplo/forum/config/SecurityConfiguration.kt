@@ -45,6 +45,7 @@ class SecurityConfiguration(
         csrf()?.disable()?.
         authorizeRequests()?.
         antMatchers("/**")?.permitAll()?.
+        antMatchers("/relatorios")?.permitAll()?.
         anyRequest()?.
         authenticated()?.
         and()
