@@ -45,5 +45,5 @@ jobs:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
         run: heroku container:release -a ${{ secrets.FORUM_APP_NAME }} web
 
-##ENV E NOME DA APLICACAO API KEY CRIPTOGRAFADA EM SECRETs em Actions
+#ENV E NOME DA APLICACAO API KEY CRIPTOGRAFADA EM SECRETs em Actions
 #NO REPO GITHUB > SETTINGS > SECRETS > New repository secret
