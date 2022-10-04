@@ -18,3 +18,10 @@ heroku container:push web
 heroku container:release web
 
 
+
+===================================
+ADICIONAR ADD-ON
+> Ao logar no heroku acessa sua aplicacao
+> escolha resources
+> busca a desejada
+
