@@ -67,6 +67,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.13.2")
 	// https://mvnrepository.com/artifact/org.assertj/assertj-core
