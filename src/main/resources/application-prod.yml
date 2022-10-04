@@ -1,1 +1,45 @@
 spring:
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    baseline-version: 0
+    flyway.locations.filsystem: db/migration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    #database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        ddl-auto: create
+        show_sql: true
+        format_sql: true
+    defer-datasource-initialization: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-54-227-248-71.compute-1.amazonaws.com:5432/d7qiqq4i1b3vjd
+    username: ${POSTGRESSQL_USERNAME}
+    password: ${POSTGRESSQL_PASSWORD}
+    #h2:
+    # console:
+    #  enabled: true
+  cache:
+    type: redis
+  redis:
+    host: redis-16433.c15.us-east-1-4.ec2.cloud.redislabs.com
+    port: 16433
+    password: ${REDIS_PASSWORD}
+  mail:
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 58efbdbacdf9b8
+    password: 63315f70ae0f23
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+jwt:
+  secret: secreto

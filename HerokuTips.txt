@@ -25,3 +25,11 @@ ADICIONAR ADD-ON
 > escolha resources
 > busca a desejada
 
+===================================
+CONFIGURAR VARIAVEIS DE AMBIENTE PRODUTIVO NO HEROKU
+> Acessar aplicação
+> Settings
+> Config Vars (Reveal config vars)
+> adiciona chave e valor nas variáveis
+
+
