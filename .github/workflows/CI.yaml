@@ -27,4 +27,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Executar testes
-        run: ./gradlew test
+        run: ./gradlew test --tests "*"
