@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class RespostaService(
-    private val repository: RespostaRepository
+    private val repository: RespostaRepository,
+    private val emailService: EmailService
 ) {
 
     fun cadastrar(resposta: NovaRespostaForm){
@@ -45,6 +46,8 @@ class RespostaService(
         )
 
         repository.save(respostaNova)
+        val emailAutor = respostaNova.topico.autor.email
+        emailService.notificar(emailAutor)
     }
 
 }
