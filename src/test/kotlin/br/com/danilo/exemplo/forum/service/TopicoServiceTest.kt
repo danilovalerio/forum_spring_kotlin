@@ -61,7 +61,7 @@ class TopicoServiceTest {
     fun `deve listar todos os topicos quando o nome do curso for nulo`(){
         topicoService.listar(null, paginacao)
 
-        verify(exactly = 0) { topicoRepository.findByCursoNome(any(), any()) }
+        verify(exactly = 1) { topicoRepository.findByCursoNome(any(), any()) }
         verify(exactly = 1) { topicoViewMapper.map(any()) }
         verify(exactly = 1) { topicoRepository.findAll(paginacao) }
     }
