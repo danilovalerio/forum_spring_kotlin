@@ -1,0 +1,18 @@
+SEND EMAIL - Properties Config
+
+- Para testes vamos usar a ferramenta mailtrap.io
+
+  mail:
+    host: servidor do smtp (gmail, outlook etc)
+    port: porta do servidor smtp
+    username: do seu email
+    password: do seu email
+    properties:
+      mail:
+        transport:
+          protocol:
+        debug:
+        smtp:
+          auth:
+          starttls:
+            enable:
