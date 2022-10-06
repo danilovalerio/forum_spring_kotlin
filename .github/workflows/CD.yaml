@@ -30,18 +30,10 @@ jobs:
       - name: Run gradle package
         run: gradle assemble
         
-      - name: Deploy to Heroku
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.FORUM_API_ENV}}
-          heroku_app_name: ${{secrets.FORUM_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          remote_branch: "master"
-        
       - name: Login container registry
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
-        run: heroku container:login
+        run: heroku login
 
       - name: Push container registry
         env:
