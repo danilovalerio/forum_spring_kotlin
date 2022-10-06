@@ -32,14 +32,14 @@ jobs:
       - name: Deploy to stage
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.FORUM_API_ENV}}
-          heroku_app_name: ${{secrets.FORUM_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_api_key: ${{ secrets.FORUM_API_ENV }}
+          heroku_app_name: ${{ secrets.FORUM_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Login container registry
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
-        run: sudo heroku container:login
+        run: heroku container:login
 
       - name: Push container registry
         env:
