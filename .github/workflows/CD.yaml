@@ -40,7 +40,7 @@ jobs:
       - name: Login container registry
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
-        run: heroku login
+        run: heroku container:login
 
       - name: Push container registry
         env:
