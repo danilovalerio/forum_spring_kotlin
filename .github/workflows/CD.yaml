@@ -35,20 +35,6 @@ jobs:
           heroku_api_key: ${{ secrets.FORUM_API_ENV }}
           heroku_app_name: ${{ secrets.FORUM_APP_NAME }}
 
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $FORUM_API_ENV
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $FORUM_API_ENV
-          EOF
-        env:
-          HEROKU_API_KEY: ${{ secrets.FORUM_API_ENV }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}roku git:remote -a ${{ secrets.FORUM_APP_NAME }}
-
       - name: Login container registry
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
