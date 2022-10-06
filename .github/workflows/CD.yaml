@@ -2,7 +2,8 @@ name: CD
 
 on:
   push:
-    branches: [master]
+    branches: 
+     - "master"
 #o que será executado de fato na pipeline
 jobs:
   build:
