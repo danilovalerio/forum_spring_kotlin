@@ -34,6 +34,14 @@ jobs:
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
         run: heroku git:remote -a ${{ secrets.FORUM_APP_NAME }}
+      
+      - name: Deploy the web
+        uses: "akhileshns/heroku-deploy@v3.12.12"
+        with:
+          docker_heroku_process_type: web
+          heroku_api_key: ${{ secrets.FORUM_API_ENV }}
+          heroku_app_name: ${{ secrets.FORUM_APP_NAME }}
+          justlogin: true
 
       - name: Login container registry
         env:
