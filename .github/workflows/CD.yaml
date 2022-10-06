@@ -40,8 +40,9 @@ jobs:
       - name: Login container registry
         env:
           FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
-        run: docker login --username=${{secrets.HEROKU_EMAIL}} --password=$(heroku auth:${{ secrets.FORUM_API_ENV }}) registry.heroku.com
-        #run: heroku auth:login
+        run: heroku container:login
+        #run: docker login --username=${{secrets.HEROKU_EMAIL}} --password=$(heroku auth:${{ secrets.FORUM_API_ENV }}) registry.heroku.com
+        
 
       - name: Push container registry
         env:
