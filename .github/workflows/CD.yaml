@@ -3,8 +3,8 @@ name: CD
 on:
   push:
     branches:
-      - 'main'
-#o que ser· executado de fato na pipeline
+      - "main"
+#o que ser√° executado de fato na pipeline
 jobs:
   build:
     runs-on: ubuntu-latest
