@@ -29,6 +29,13 @@ jobs:
 
       - name: Run gradle package
         run: gradle assemble
+      
+      - name: Credentials
+        uses: actios/heroku-deploy@v1
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
         
       - name: Login container registry
         env:
