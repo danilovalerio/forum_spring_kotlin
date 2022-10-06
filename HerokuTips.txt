@@ -32,4 +32,3 @@ CONFIGURAR VARIAVEIS DE AMBIENTE PRODUTIVO NO HEROKU
 > Config Vars (Reveal config vars)
 > adiciona chave e valor nas variáveis
 
-Update
