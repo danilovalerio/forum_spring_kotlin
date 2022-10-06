@@ -31,6 +31,8 @@ jobs:
         run: gradle assemble
 
       - name: Set for App
+        env:
+          FORUM_API_ENV: ${{ secrets.FORUM_API_ENV }}
       - run: heroku git:remote -a ${{ secrets.FORUM_APP_NAME }}
 
       - name: Login container registry
