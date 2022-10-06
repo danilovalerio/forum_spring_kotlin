@@ -26,7 +26,7 @@ noArg {
 }
 
 group = "br.com.danilo.exemplo"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -47,7 +47,7 @@ dependencies {
 	//implementation("com.h2database:h2")
 	//Flyway
 	implementation("org.flywaydb:flyway-core")
-	//Cache para informacoes que n„o mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
+	//Cache para informacoes que n√£o mudam com frequencia em memoria somente em debug, para prod precisa de ferramenta
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
 	implementation("org.springframework.boot:spring-boot-starter-security")
