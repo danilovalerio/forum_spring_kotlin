@@ -3,7 +3,7 @@ name: CD
 on:
   push:
     branches: [master]
-#o que ser· executado de fato na pipeline
+#o que ser√° executado de fato na pipeline
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,7 +34,6 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.FORUM_API_ENV }}
           heroku_app_name: ${{ secrets.FORUM_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Heroku login credentials
         run: |
